@@ -1,0 +1,41 @@
+name: seneca_comenta bot
+
+on:
+  schedule:
+    - cron: '5 * * * *'
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v2
+      name: Configure pip caching
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install Python dependencies
+      run: |
+        pip3 install -r requirements.txt
+    - name: Run bot
+      env:
+        CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+        CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }} 
+        ACCESS_KEY: ${{ secrets.ACCESS_KEY }} 
+        ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }} 
+      run: python send_tweet.py
+    - name: Commit and push if it changed
+      run: |
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Automatically update data: ${timestamp}" || exit 0
+        git push
