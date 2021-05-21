@@ -1,0 +1,11 @@
+/senec_env
+workspace.code-workspace
+/.vscode
+.DS_Store
+settings.json
+credentials.py
+/__pychache__
+prueba.ipynb
+seneca.ipynb
+old_req.txt
+seneca_local.py
