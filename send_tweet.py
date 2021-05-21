@@ -18,8 +18,8 @@ api = tweepy.API(auth)
 interval = 60 * 60
 
 while True:
-    print('buscando frase...')        
+    print('Buscando frase...')        
     tweet = get_tweet()
     api.update_status(tweet)
-    print("tweet enviado")
+    print("Tweet enviado!")
     time.sleep(interval)
