@@ -4,7 +4,6 @@ workspace.code-workspace
 .DS_Store
 settings.json
 credentials.py
-/__pychache__
 prueba.ipynb
 seneca.ipynb
 old_req.txt
