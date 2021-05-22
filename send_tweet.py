@@ -19,6 +19,6 @@ interval = 60 * 60
 while True:
     print('Buscando frase...')        
     tweet = get_tweet()
-    api.update_status(tweet[1:])
+    api.update_status(tweet)
     print("Tweet enviado!")
     time.sleep(interval)

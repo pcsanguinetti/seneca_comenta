@@ -45,7 +45,7 @@ def get_match(list_of_urls):
                 link = links[q]
                 content = contenido[q]
     
-    return frase, titular, score, link, content
+    return frase[1:], titular, score, link, content
 
 # Fill df with register of previous titles and Seneca sentences
 
