@@ -13,9 +13,13 @@ filelock==3.0.12
 huggingface-hub==0.0.8
 idna==2.10
 ipykernel==5.5.0
+ipython==7.21.0
+ipython-genutils==0.2.0
 jedi==0.18.0
 Jinja2==3.0.1
 joblib==1.0.1
+jupyter-client==6.1.12
+jupyter-core==4.7.1
 MarkupSafe==2.0.1
 murmurhash==1.0.5
 numpy==1.20.2
@@ -38,6 +42,7 @@ pyzmq==22.0.3
 regex==2021.4.4
 requests==2.25.1
 sacremoses==0.0.45
+scikit-learn==0.24.2
 scipy==1.6.3
 sentence-transformers==1.1.1
 sentencepiece==0.1.95
@@ -60,5 +65,3 @@ typing-extensions==3.10.0.0
 urllib3==1.26.4
 wasabi==0.8.2
 wcwidth==0.2.5
-Flask
-Tweepy
