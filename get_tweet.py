@@ -67,7 +67,7 @@ def get_tweet():
     
     frase, titular, score, link, content = get_match(urls)
     
-    text = '"' + frase + '"' + "\n(Séneca, Epístolas a Lucilio)\n\n" + link
+    text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio)\n\n" + link
     fill_df(text, titular, link, frase)
 
     return text
