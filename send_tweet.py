@@ -14,11 +14,18 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
+print('buscando frase...')        
+tweet = get_tweet()
+api.update_status(tweet)
+print("tweet enviado")
+
+'''
 interval = 60 * 60
 
 while True:
-    print('Buscando frase...')        
+    print('buscando frase...')        
     tweet = get_tweet()
     api.update_status(tweet)
-    print("Tweet enviado!")
+    print("tweet enviado")
     time.sleep(interval)
+'''
