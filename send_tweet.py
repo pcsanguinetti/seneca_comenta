@@ -3,7 +3,6 @@ import tweepy
 from os import environ
 import time
 
-print("Comienza el programa")
 
 CONSUMER_KEY = environ["CONSUMER_KEY"]
 CONSUMER_SECRET = environ["CONSUMER_SECRET"]

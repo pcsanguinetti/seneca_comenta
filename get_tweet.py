@@ -3,6 +3,7 @@ import pickle
 import feedparser
 from datetime import datetime
 import pandas as pd
+import re
 
 model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
 
@@ -22,11 +23,12 @@ def get_match(list_of_urls):
     links = []
     contenido = []
     sentences, embeddings1 = import_embeddings()
+    pattern = "mata|muere|muerte|asesin"
 
     for url in list_of_urls:
         NewsFeed = feedparser.parse(url)
         for entry in NewsFeed.entries:
-            if entry.published_parsed[2] == datetime.now().day:
+            if entry.published_parsed[2] == datetime.now().day and re.search(pattern, entry.description.lower()) is None:
                 titulares.append(entry.title)
                 links.append(entry.link)
                 contenido.append(entry.description)
