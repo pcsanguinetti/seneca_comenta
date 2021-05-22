@@ -1,6 +1,5 @@
 from get_tweet import get_tweet
 import tweepy
-import os
 from os import environ
 import time
 
@@ -20,6 +19,6 @@ interval = 60 * 60
 while True:
     print('Buscando frase...')        
     tweet = get_tweet()
-    api.update_status(tweet)
+    api.update_status(tweet[1:])
     print("Tweet enviado!")
     time.sleep(interval)
