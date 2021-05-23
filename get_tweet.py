@@ -81,7 +81,7 @@ def get_tweet():
     urls = ["https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml",
         "https://www.abc.es/rss/feeds/abcPortada.xml",
-        "https://rss.elconfidencial.com/espana/",
+        #"https://rss.elconfidencial.com/espana/",
         "http://api2.rtve.es/rss/temas_espana.xml",
         "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
