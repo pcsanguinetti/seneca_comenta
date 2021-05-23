@@ -4,6 +4,7 @@ import feedparser
 from datetime import datetime
 import pandas as pd
 import re
+import ast
 
 model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
 
@@ -56,6 +57,20 @@ def fill_df(text, titular, link, seneca):
     df.loc[len(df)] = [text, titular, link, seneca, datetime.today()]
     df.to_csv("register.csv")
 
+def chapter(frase):
+    with open("epistolas.txt") as f:
+        texto = f.read()
+    with open("chapterdict.txt") as f:
+        capitulos = f.read()
+    d = ast.literal_eval(capitulos)
+
+    ubicada = re.search(frase, texto).start()
+
+    for capitulo, ubicacion in d.items():
+        if ubicada > ubicacion:
+            cap = capitulo
+    return cap
+
 # Create text for tweet
 
 def get_tweet():
@@ -68,8 +83,8 @@ def get_tweet():
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
     
     frase, titular, score, link, content = get_match(urls)
-    
-    text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio)\n\n" + link
+    nro = chapter(frase)
+    text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
     fill_df(text, titular, link, frase)
 
     return text
