@@ -64,11 +64,15 @@ def chapter(frase):
         capitulos = f.read()
     d = ast.literal_eval(capitulos)
 
-    ubicada = re.search(frase, texto).start()
-
-    for capitulo, ubicacion in d.items():
-        if ubicada > ubicacion:
-            cap = capitulo
+    ubicada = re.search(frase.replace("?", "\?"), texto)
+    
+    if ubicada is None:
+        cap = "s/n"
+    else:
+        ubicada = ubicada.start()
+        for capitulo, ubicacion in d.items():
+            if ubicada > ubicacion:
+                cap = capitulo
     return cap
 
 # Create text for tweet
@@ -83,6 +87,7 @@ def get_tweet():
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
     
     frase, titular, score, link, content = get_match(urls)
+    print(frase)
     nro = chapter(frase)
     text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
     fill_df(text, titular, link, frase)
