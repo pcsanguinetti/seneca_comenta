@@ -24,7 +24,7 @@ def get_match(list_of_urls):
     links = []
     contenido = []
     sentences, embeddings1 = import_embeddings()
-    pattern = "mata|muere|muerte|asesin"
+    pattern = "mata|muere|muert|asesin"
 
     for url in list_of_urls:
         NewsFeed = feedparser.parse(url)

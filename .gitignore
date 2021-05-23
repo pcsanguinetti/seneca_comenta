@@ -11,4 +11,4 @@ seneca_local.py
 Procfile
 server.py
 capitulos.txt
-/__pycache__
+*.pyc
