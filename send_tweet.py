@@ -15,7 +15,8 @@ api = tweepy.API(auth)
 
 print('buscando frase...')        
 tweet = get_tweet()
-api.update_status(tweet)
+if len(tweet) < 281:
+    api.update_status(tweet)
 print("tweet enviado")
 
 '''
