@@ -90,7 +90,7 @@ def get_tweet():
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
     
     frase, titular, score, link, content = get_match(urls)
-    print(frase)
+    print("El titular '{}'\ntiene un score de proximidad de {} con la frase:\n'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}".format(titular, score, frase, content, link))
     nro = chapter(frase)
     text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
     fill_df(text, titular, link, frase)
