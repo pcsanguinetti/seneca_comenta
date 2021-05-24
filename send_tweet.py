@@ -15,9 +15,12 @@ api = tweepy.API(auth)
 
 print('buscando frase...')        
 tweet = get_tweet()
+
 if len(tweet) < 281:
     api.update_status(tweet)
-print("tweet enviado")
+    print("tweet enviado")
+else:
+    print("tweet demasiado largo")
 
 '''
 interval = 60 * 60

@@ -44,7 +44,7 @@ def get_match(list_of_urls):
 
     for i in range(len(sentences)):
         for q in range(len(titulares)):
-            if cosine_scores[i][q] > score and len(sentences[i]) < 280:
+            if cosine_scores[i][q] > score and len(sentences[i]) < 270:
                 score = cosine_scores[i][q]
                 frase = sentences[i]
                 titular = titulares[q]
@@ -84,7 +84,7 @@ def get_tweet():
     urls = ["https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml",
         "https://www.abc.es/rss/feeds/abcPortada.xml",
-        #"https://rss.elconfidencial.com/espana/",
+        "https://rss.elconfidencial.com/espana/",
         "http://api2.rtve.es/rss/temas_espana.xml",
         "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
