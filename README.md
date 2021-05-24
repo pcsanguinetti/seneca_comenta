@@ -1,4 +1,4 @@
-# seneca_comenta
+# Séneca Opina (Twitter Bot)
 ## Twitter bot that applies NLP to comment on news stories with Seneca sentences
 
 This bot reads headlines in Spanish newspapers, chooses one that connects with some sentence of Seneca's Letters to Lucilius, and publishes both the headline and the sentence once a day in the Twitter account https://twitter.com/SenecaOpinaBot. The result gives the impression that the stoic philosopher is commenting on current stories in the news.
