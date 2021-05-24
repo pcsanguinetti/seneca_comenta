@@ -55,9 +55,9 @@ def get_match(list_of_urls):
 
 # Fill df with register of previous titles and Seneca sentences
 
-def fill_df(text, titular, link, seneca):
+def fill_df(frase, titular, link, score):
     df = pd.read_csv("register.csv", index_col=[0])
-    df.loc[len(df)] = [text, titular, link, seneca, datetime.today()]
+    df.loc[len(df)] = [frase, titular, link, score, datetime.today()]
     df.to_csv("register.csv")
 
 def chapter(frase):
@@ -93,6 +93,6 @@ def get_tweet():
     print("El titular '{}'\ntiene un score de proximidad de {} con la frase:\n'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}".format(titular, score, frase, content, link))
     nro = chapter(frase)
     text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
-    fill_df(text, titular, link, frase)
+    fill_df(frase, titular, link, score)
 
     return text
