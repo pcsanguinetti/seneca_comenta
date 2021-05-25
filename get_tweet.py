@@ -1,3 +1,5 @@
+print("Importando librerías")
+
 from sentence_transformers import SentenceTransformer, util
 import pickle
 import feedparser
@@ -6,10 +8,9 @@ import pandas as pd
 import re
 import ast
 
-print("Cargando modelo...")
-model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
-print("Modelo cargado.")
+print("Librerías importadas")
 
+model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
 
 # Import Seneca embeddings
 
@@ -32,7 +33,7 @@ def get_match(list_of_urls):
     for url in list_of_urls:
         NewsFeed = feedparser.parse(url)
         for entry in NewsFeed.entries:
-            if entry.published_parsed[2] == datetime.now().day and re.search(pattern, entry.description.lower()) is None:
+            # if entry.published_parsed[2] == datetime.now().day and re.search(pattern, entry.description.lower()) is None:
                 titulares.append(entry.title)
                 links.append(entry.link)
                 contenido.append(entry.description)
@@ -40,16 +41,25 @@ def get_match(list_of_urls):
     embeddings2 = model.encode(contenido, convert_to_tensor=True)
 
     cosine_scores = util.pytorch_cos_sim(embeddings1, embeddings2)
+
+    # New list with recently used sentences to avoid repetition
+
+    df = pd.read_csv("register.csv", index_col=[0])
+    usadas = df["frase"].tail(10).tolist()
+
+    # Check best match
+
     score = 0
 
     for i in range(len(sentences)):
-        for q in range(len(titulares)):
-            if cosine_scores[i][q] > score and len(sentences[i]) < 270:
-                score = cosine_scores[i][q]
-                frase = sentences[i]
-                titular = titulares[q]
-                link = links[q]
-                content = contenido[q]
+        if sentences[i] not in usadas and len(sentences[i]) < 215:
+            for q in range(len(titulares)):
+                if cosine_scores[i][q] > score:
+                    score = cosine_scores[i][q]
+                    frase = sentences[i]
+                    titular = titulares[q]
+                    link = links[q]
+                    content = contenido[q]
     
     return frase[1:], titular, score, link, content
 
@@ -90,9 +100,11 @@ def get_tweet():
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
     
     frase, titular, score, link, content = get_match(urls)
-    print("El titular '{}'\ntiene un score de proximidad de {} con la frase:\n'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}".format(titular, score, frase, content, link))
     nro = chapter(frase)
     text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
+    
     fill_df(frase, titular, link, score)
+
+    print("El titular '{}'\ntiene un score de proximidad de {}\ncon la frase:'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}.\nEl tuit tiene {} caracteres".format(titular, score, frase, content, link, len(text)))
 
     return text
