@@ -52,8 +52,8 @@ def get_match(list_of_urls):
     score = 0
 
     for i in range(len(sentences)):
-        if sentences[i] not in usadas and len(sentences[i]) < 215:
-            for q in range(len(titulares)):
+        for q in range(len(titulares)):
+            if sentences[i][1:] not in usadas and len(sentences[i]) < 215:
                 if cosine_scores[i][q] > score:
                     score = cosine_scores[i][q]
                     frase = sentences[i]
