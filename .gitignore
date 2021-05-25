@@ -11,4 +11,3 @@ seneca_local.py
 Procfile
 server.py
 capitulos.txt
-*.pyc
