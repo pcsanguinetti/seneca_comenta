@@ -91,6 +91,7 @@ def chapter(frase):
 # Create text for tweet
 
 def get_tweet():
+
     urls = ["https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/espana/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml",
         "https://www.abc.es/rss/feeds/abcPortada.xml",
@@ -98,13 +99,19 @@ def get_tweet():
         "http://api2.rtve.es/rss/temas_espana.xml",
         "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
         "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"]
-    
-    frase, titular, score, link, content = get_match(urls)
-    nro = chapter(frase)
-    text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link
-    
-    fill_df(frase, titular, link, score)
 
-    print("El titular '{}'\ntiene un score de proximidad de {}\ncon la frase:'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}.\nEl tuit tiene {} caracteres".format(titular, score, frase, content, link, len(text)))
+    buscando = True
+    
+    while buscando:
+        frase, titular, score, link, content = get_match(urls)
+        nro = chapter(frase)
+        text = '"' + frase + '"' + "\n(Séneca, Epístolas morales a Lucilio, " + str(nro) + ")\n\n" + link       
+        fill_df(frase, titular, link, score)
+        chrs_frase, chrs_link, chrs_resto = len(frase), 23, 43
+        chrs_tuit = chrs_frase + chrs_link + chrs_resto
+
+        if chrs_tuit < 281:
+            print("El titular '{}'\ntiene un score de proximidad de {}\ncon la frase:'{}'.\nEl resumen de la nota es: {}\ny se encuentra en {}.\nEl tuit tiene {} caracteres".format(titular, score, frase, content, link, chrs_tuit))
+            buscando = False
 
     return text
