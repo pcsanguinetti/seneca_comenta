@@ -16,3 +16,5 @@ This bot reads headlines in Spanish newspapers, chooses one that seems to connec
 8. Post the tweet twice a day using Github Actions.
 
 A first attempt to deploy the bot through Heroku failed, because the Bert model used for the embeddings ('distiluse-base-multilingual-cased-v1') was too big.
+
+Source text for the sentences is [here](https://archive.org/details/ColeccionObrasGrecoLatinas3/Seneca-LucioAnneoSeneca/mode/2up)

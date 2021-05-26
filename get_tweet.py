@@ -15,7 +15,7 @@ model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
 # Import Seneca embeddings
 
 def import_embeddings():
-    with open('embeddings_seneca.pkl', "rb") as fIn:
+    with open('embed_seneca.pkl', "rb") as fIn:
         stored_data = pickle.load(fIn)
         sentences = stored_data['sentences']
         embeddings1 = stored_data['embeddings']
@@ -53,7 +53,7 @@ def get_match(list_of_urls):
 
     for i in range(len(sentences)):
         for q in range(len(titulares)):
-            if sentences[i][1:] not in usadas and len(sentences[i]) < 215:
+            if sentences[i] not in usadas:
                 if cosine_scores[i][q] > score:
                     score = cosine_scores[i][q]
                     frase = sentences[i]
@@ -61,7 +61,7 @@ def get_match(list_of_urls):
                     link = links[q]
                     content = contenido[q]
     
-    return frase[1:], titular, score, link, content
+    return frase, titular, score, link, content
 
 # Fill df with register of previous titles and Seneca sentences
 
