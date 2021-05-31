@@ -2,7 +2,7 @@ name: seneca_comenta bot
 
 on:
   schedule:
-    - cron: '5 7,16 * * *'
+    - cron: '5 16 * * *'
 
 jobs:
   scheduled:
