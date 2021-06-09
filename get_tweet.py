@@ -33,7 +33,7 @@ def get_match(list_of_urls):
     for url in list_of_urls:
         NewsFeed = feedparser.parse(url)
         for entry in NewsFeed.entries:
-            # if entry.published_parsed[2] == datetime.now().day and re.search(pattern, entry.description.lower()) is None:
+            if re.search(pattern, entry.description.lower()) is None:
                 titulares.append(entry.title)
                 links.append(entry.link)
                 contenido.append(entry.description)
@@ -45,7 +45,7 @@ def get_match(list_of_urls):
     # New list with recently used sentences to avoid repetition
 
     df = pd.read_csv("register.csv", index_col=[0])
-    usadas = df["frase"].tail(10).tolist()
+    usadas = df["frase"].tail(15).tolist()
 
     # Check best match
 
